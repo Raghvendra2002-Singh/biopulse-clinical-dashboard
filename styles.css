@@ -1,0 +1,752 @@
+/* ==========================================================================
+   BIOPULSE DESIGN SYSTEM & CLINICAL STYLES
+   ========================================================================== */
+
+:root {
+    /* Clinical Dark Palette */
+    --bg-darkest: #07090e;
+    --bg-darker: #0c0f17;
+    --bg-dark: #121824;
+    --bg-card: rgba(18, 24, 36, 0.7);
+    --bg-card-hover: rgba(26, 35, 52, 0.8);
+    --bg-inner: rgba(0, 0, 0, 0.3);
+    
+    --color-text-main: #f1f5f9;
+    --color-text-muted: #64748b;
+    --color-text-light: #94a3b8;
+    
+    /* BioPulse Neon Accents */
+    --color-primary: #10b981;      /* Neon Mint (Frontal) */
+    --color-primary-glow: rgba(16, 185, 129, 0.25);
+    
+    --color-cyan: #06b6d4;         /* Cyan (Parietal) */
+    --color-cyan-glow: rgba(6, 182, 212, 0.25);
+    
+    --color-pink: #ec4899;         /* Pink (Occipital) */
+    --color-pink-glow: rgba(236, 72, 153, 0.25);
+    
+    --color-amber: #f59e0b;        /* Amber (Temporal) */
+    --color-amber-glow: rgba(245, 158, 11, 0.25);
+    
+    --color-purple: #8b5cf6;       /* Violet (Cerebellum) */
+    --color-purple-glow: rgba(139, 92, 246, 0.25);
+
+    --color-stem: #64748b;         /* Slate (Brain Stem) */
+    
+    --color-error: #ef4444;        /* Red Alert */
+    --color-border: rgba(255, 255, 255, 0.06);
+    --color-border-active: rgba(16, 185, 129, 0.4);
+
+    /* Fonts & Radii */
+    --font-sans: 'Outfit', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    
+    /* Transitions */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-darkest);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    height: 100vh;
+    overflow: hidden;
+    line-height: 1.5;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Header Area */
+.dashboard-header {
+    height: 70px;
+    background: rgba(12, 15, 23, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.heartbeat-pulse {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background: var(--color-primary);
+    filter: blur(10px);
+    opacity: 0.4;
+    border-radius: 50%;
+    animation: heartbeat 2s infinite ease-in-out;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    30% { transform: scale(1.3); opacity: 0.6; }
+    40% { transform: scale(1.1); opacity: 0.5; }
+    50% { transform: scale(1.4); opacity: 0.7; }
+}
+
+.brand-icon {
+    color: var(--color-primary);
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0 0 4px var(--color-primary-glow));
+    z-index: 1;
+}
+
+.brand-text h1 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.brand-text h1 span {
+    color: var(--color-primary);
+    text-shadow: 0 0 6px var(--color-primary-glow);
+}
+
+.brand-text .tagline {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+}
+
+/* Patient Selector Selector */
+.patient-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-inner);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+}
+
+.select-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-primary);
+}
+
+.patient-select {
+    background: transparent;
+    border: none;
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    padding-right: 12px;
+}
+
+.patient-select option {
+    background-color: var(--bg-darker);
+    color: var(--color-text-main);
+}
+
+/* Diagnostics Header metrics */
+.session-diagnostics {
+    display: flex;
+    gap: 20px;
+}
+
+.diagnostic-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.diag-label {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.diag-value {
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+}
+
+.diag-value.green {
+    color: var(--color-primary);
+    text-shadow: 0 0 4px var(--color-primary-glow);
+}
+
+/* Dashboard Workspace Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 310px 1fr 340px;
+    height: calc(100vh - 70px - 200px); /* Adjusts dynamically with header/footer */
+    gap: 16px;
+    padding: 16px;
+    width: 100vw;
+}
+
+.grid-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    overflow-y: auto;
+    transition: border-color var(--transition-normal);
+}
+
+.grid-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.card-header i {
+    width: 18px;
+    height: 18px;
+    color: var(--color-primary);
+}
+
+.card-header h2 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-header .badge {
+    margin-left: auto;
+    font-size: 0.6rem;
+    font-family: var(--font-mono);
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    color: var(--color-text-light);
+}
+
+.card-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 18px 0;
+}
+
+/* Patient Bio Card Details */
+.patient-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.patient-info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+
+.patient-info-row span:first-child {
+    color: var(--color-text-muted);
+}
+
+.patient-info-row span:last-child {
+    font-weight: 500;
+    color: var(--color-text-main);
+}
+
+.status-capsule {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+
+.status-capsule.healthy {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+}
+
+.status-capsule.stress {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+}
+
+.status-capsule.suppressed {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #fbbf24;
+}
+
+/* Analytical Metrics Progress Bars */
+.metrics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.metric-progress-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.metric-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+}
+
+.metric-percentage,
+.metric-value {
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+.progress-bar-bg {
+    height: 6px;
+    background: var(--bg-inner);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s cubic-bezier(0.1, 0.8, 0.25, 1);
+}
+
+.focus-color { background-color: var(--color-primary); box-shadow: 0 0 6px var(--color-primary-glow); }
+.load-color { background-color: var(--color-cyan); box-shadow: 0 0 6px var(--color-cyan-glow); }
+.speed-color { background-color: var(--color-amber); box-shadow: 0 0 6px var(--color-amber-glow); }
+
+/* Center Brain Mapping Column */
+.col-brainmap {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brain-mapping-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brain-svg {
+    max-height: 270px;
+    width: 100%;
+}
+
+/* Brain Lobe Interactive SVG Path styling */
+.brain-lobe {
+    stroke: var(--color-border);
+    stroke-width: 2.5;
+    cursor: pointer;
+    transition: fill-opacity var(--transition-fast), stroke var(--transition-fast), filter var(--transition-normal);
+    filter: drop-shadow(0 0 2px transparent);
+}
+
+.brain-lobe:hover {
+    fill-opacity: 0.85;
+    stroke: #fff;
+    filter: drop-shadow(0 0 10px var(--color-border-active));
+}
+
+.brain-lobe.active-inspecting {
+    stroke: #fff;
+    stroke-width: 3.5;
+    fill-opacity: 0.9;
+}
+
+#lobe-frontal.active-inspecting { filter: drop-shadow(0 0 12px var(--color-primary-glow)); }
+#lobe-parietal.active-inspecting { filter: drop-shadow(0 0 12px var(--color-cyan-glow)); }
+#lobe-occipital.active-inspecting { filter: drop-shadow(0 0 12px var(--color-pink-glow)); }
+#lobe-temporal.active-inspecting { filter: drop-shadow(0 0 12px var(--color-amber-glow)); }
+#lobe-cerebellum.active-inspecting { filter: drop-shadow(0 0 12px var(--color-purple-glow)); }
+#lobe-stem.active-inspecting { filter: drop-shadow(0 0 12px rgba(255,255,255,0.15)); }
+
+.lobe-label {
+    fill: var(--color-text-main);
+    font-size: 11px;
+    font-weight: 600;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+}
+
+.lobe-label-sub {
+    fill: var(--color-text-muted);
+    font-size: 9px;
+    pointer-events: none;
+}
+
+/* Diagnostic Readout Panel */
+.diagnostic-readout {
+    width: 100%;
+    background: var(--bg-inner);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.diagnostic-readout h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-primary);
+}
+
+.diagnostic-readout p {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    line-height: 1.4;
+}
+
+/* Right Sidebar: Cognitive Testing Tab Control */
+.game-tabs {
+    display: flex;
+    background: var(--bg-inner);
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    margin-bottom: 16px;
+}
+
+.game-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: var(--transition-fast);
+}
+
+.game-tab:hover {
+    color: var(--color-text-main);
+}
+
+.game-tab.active {
+    background-color: var(--bg-dark);
+    color: var(--color-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.game-workspace {
+    flex: 1;
+    background: var(--bg-inner);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.game-intro h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.game-intro p {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+.game-play {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.game-timer-banner {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: var(--color-text-light);
+}
+
+.stroop-word {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin: 12px 0;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.stroop-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+}
+
+.stroop-btn {
+    padding: 8px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.8rem;
+    border: 1px solid var(--color-border);
+    background: var(--bg-dark);
+    color: var(--color-text-main);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.stroop-btn:hover {
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
+}
+
+.stroop-btn.color-GREEN { color: #10b981; }
+.stroop-btn.color-BLUE { color: #3b82f6; }
+.stroop-btn.color-RED { color: #ef4444; }
+.stroop-btn.color-YELLOW { color: #f59e0b; }
+
+/* Target Reaction Grid clicks styling */
+.target-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 220px;
+    margin: 10px 0;
+}
+
+.grid-dot {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--bg-dark);
+    border: 2px solid var(--color-border);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.grid-dot.target {
+    background-color: var(--color-primary);
+    border-color: #fff;
+    box-shadow: 0 0 12px var(--color-primary);
+}
+
+/* Results Display */
+.game-results {
+    width: 100%;
+}
+
+.game-results h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.stats-row span:last-child {
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+.stats-row .green { color: var(--color-primary); }
+
+/* EEG Telemetry Canvas footer drawer */
+.telemetry-panel {
+    height: 200px;
+    background: #080a0f;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.telemetry-panel-header {
+    height: 40px;
+    background: rgba(12, 15, 23, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.telemetry-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.telemetry-title i {
+    color: var(--color-primary);
+    width: 14px;
+    height: 14px;
+}
+
+.telemetry-filters {
+    display: flex;
+    gap: 16px;
+}
+
+.telemetry-filter-chk {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: var(--color-text-light);
+    cursor: pointer;
+}
+
+.telemetry-filter-chk input {
+    cursor: pointer;
+}
+
+.telemetry-filter-chk input:checked + span {
+    color: var(--color-text-main);
+    font-weight: 500;
+}
+
+.telemetry-canvas-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.eeg-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Global button override */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    background: rgba(255,255,255,0.03);
+    color: var(--color-text-main);
+    transition: var(--transition-fast);
+}
+
+.btn:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: transparent;
+    color: #07090e;
+}
+
+.btn-primary:hover {
+    background-color: #34d399;
+    box-shadow: 0 0 10px var(--color-primary-glow);
+}
+
+.btn-secondary {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary-glow);
+}
+
+/* Helpers */
+.hidden {
+    display: none !important;
+}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioPulse // Cognitive Analytics & Telemetry Hub</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="medical-theme">
+    <div class="app-container">
+        <!-- Dashboard Top Header -->
+        <header class="dashboard-header">
+            <div class="brand">
+                <div class="heartbeat-pulse"></div>
+                <i data-lucide="activity" class="brand-icon"></i>
+                <div class="brand-text">
+                    <h1>BIOPULSE<span>CLINICAL</span></h1>
+                    <span class="tagline">Cognitive Telemetry Dashboard // Node-04</span>
+                </div>
+            </div>
+            
+            <div class="patient-selector-container">
+                <i data-lucide="users" class="select-icon"></i>
+                <select id="patient-select" class="patient-select">
+                    <option value="patient_1">Patient #8271 (Healthy Control)</option>
+                    <option value="patient_2">Patient #4409 (High Cognitive Stress)</option>
+                    <option value="patient_3">Patient #1192 (Alpha-Wave Suppression)</option>
+                </select>
+            </div>
+
+            <div class="session-diagnostics">
+                <div class="diagnostic-item">
+                    <span class="diag-label">Session Duration:</span>
+                    <span class="diag-value" id="session-timer">00:00:00</span>
+                </div>
+                <div class="diagnostic-item">
+                    <span class="diag-label">Signal Quality:</span>
+                    <span class="diag-value green" id="signal-strength">98.4% (Excellent)</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Workspace Layout Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Column 1: Patient Metrics Profiler -->
+            <section class="grid-card col-profile">
+                <div class="card-header">
+                    <i data-lucide="user"></i>
+                    <h2>Subject Bio-Profile</h2>
+                </div>
+                <div class="patient-card" id="patient-bio-card">
+                    <!-- Dynamic subject bio info populated here -->
+                </div>
+
+                <div class="card-divider"></div>
+
+                <div class="card-header">
+                    <i data-lucide="gauge"></i>
+                    <h2>Analytical Indices</h2>
+                </div>
+                <div class="metrics-container">
+                    <div class="metric-progress-card">
+                        <div class="metric-info">
+                            <span>Focus Index</span>
+                            <span id="focus-val" class="metric-percentage">82%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="focus-bar" class="progress-bar-fill focus-color" style="width: 82%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric-progress-card">
+                        <div class="metric-info">
+                            <span>Cognitive Load</span>
+                            <span id="load-val" class="metric-percentage">41%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="load-bar" class="progress-bar-fill load-color" style="width: 41%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric-progress-card">
+                        <div class="metric-info">
+                            <span>Synaptic Response Time</span>
+                            <span id="speed-val" class="metric-value">310 ms</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="speed-bar" class="progress-bar-fill speed-color" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Column 2: Interactive Brain Lobes Mapping -->
+            <section class="grid-card col-brainmap">
+                <div class="card-header">
+                    <i data-lucide="dribbble"></i>
+                    <h2>Cortical Lobe Mapping</h2>
+                    <span class="badge">Interactive SVG</span>
+                </div>
+                <div class="brain-mapping-container">
+                    <!-- SVG Outline of Human Brain divided into colorable lobes -->
+                    <svg viewBox="0 0 600 400" id="brain-svg" class="brain-svg">
+                        <!-- Definitions for Gradients -->
+                        <defs>
+                            <linearGradient id="frontal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#059669" stop-opacity="0.7"/>
+                            </linearGradient>
+                            <linearGradient id="parietal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#0891b2" stop-opacity="0.7"/>
+                            </linearGradient>
+                            <linearGradient id="occipital-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ec4899" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#db2777" stop-opacity="0.7"/>
+                            </linearGradient>
+                            <linearGradient id="temporal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#d97706" stop-opacity="0.7"/>
+                            </linearGradient>
+                            <linearGradient id="cerebellum-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.7"/>
+                            </linearGradient>
+                            <linearGradient id="stem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#64748b" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#475569" stop-opacity="0.7"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- LOBES GEOMETRIES -->
+                        <!-- Frontal Lobe -->
+                        <path id="lobe-frontal" class="brain-lobe" fill="url(#frontal-grad)" d="M 120 180 C 120 130, 160 80, 240 70 C 310 60, 360 110, 370 160 C 350 170, 330 180, 310 180 C 270 180, 260 210, 220 220 C 190 225, 170 200, 120 180 Z" />
+                        
+                        <!-- Parietal Lobe -->
+                        <path id="lobe-parietal" class="brain-lobe" fill="url(#parietal-grad)" d="M 370 160 C 360 110, 310 60, 390 60 C 440 60, 480 110, 480 160 C 450 170, 430 160, 410 175 C 390 190, 380 170, 370 160 Z" />
+                        
+                        <!-- Occipital Lobe -->
+                        <path id="lobe-occipital" class="brain-lobe" fill="url(#occipital-grad)" d="M 480 160 C 480 110, 520 150, 530 190 C 540 220, 510 240, 480 230 C 475 200, 470 180, 480 160 Z" />
+                        
+                        <!-- Temporal Lobe -->
+                        <path id="lobe-temporal" class="brain-lobe" fill="url(#temporal-grad)" d="M 220 220 C 260 210, 270 180, 310 180 C 330 180, 350 170, 370 160 C 380 170, 390 190, 410 175 C 430 160, 450 170, 460 200 C 460 220, 400 240, 370 250 C 330 250, 300 230, 220 220 Z" />
+                        
+                        <!-- Cerebellum -->
+                        <path id="lobe-cerebellum" class="brain-lobe" fill="url(#cerebellum-grad)" d="M 460 200 C 470 180, 475 200, 480 230 C 480 260, 420 290, 390 270 C 390 250, 420 240, 460 200 Z" />
+                        
+                        <!-- Brain Stem -->
+                        <path id="lobe-stem" class="brain-lobe" fill="url(#stem-grad)" d="M 370 250 C 400 240, 390 250, 390 270 C 375 280, 380 320, 375 340 C 360 340, 350 340, 350 320 C 355 295, 360 275, 370 250 Z" />
+
+                        <!-- Lobes Text Labels overlay -->
+                        <text x="190" y="130" class="lobe-label">Frontal Lobe</text>
+                        <text x="390" y="110" class="lobe-label">Parietal Lobe</text>
+                        <text x="310" y="210" class="lobe-label">Temporal Lobe</text>
+                        <text x="475" y="200" class="lobe-label">Occipital</text>
+                        <text x="410" y="270" class="lobe-label-sub">Cerebellum</text>
+                        <text x="315" y="320" class="lobe-label-sub">Brain Stem</text>
+                    </svg>
+                </div>
+                
+                <!-- Dynamic diagnostic readout panel for lobes -->
+                <div class="diagnostic-readout" id="lobe-diagnostic-panel">
+                    <h3 id="diag-lobe-name"><i data-lucide="info"></i> Selection Mode</h3>
+                    <p id="diag-lobe-desc">Hover over any cortex lobe region in the diagram above to inspect real-time localized electro-cortical readings.</p>
+                </div>
+            </section>
+
+            <!-- Column 3: Cognitive Capacity Testing -->
+            <section class="grid-card col-testing">
+                <div class="card-header">
+                    <i data-lucide="gamepad-2"></i>
+                    <h2>Cognitive Response Tasks</h2>
+                </div>
+                
+                <!-- Game Selection Buttons -->
+                <div class="game-tabs">
+                    <button class="game-tab active" id="tab-stroop">Stroop Color-Word</button>
+                    <button class="game-tab" id="tab-grid">Grid Reaction Speed</button>
+                </div>
+
+                <!-- Game Canvas/Area Wrapper -->
+                <div class="game-workspace">
+                    
+                    <!-- Game 1: Stroop Test -->
+                    <div class="game-view" id="game-stroop">
+                        <div class="game-intro" id="stroop-intro">
+                            <h3>Stroop Interface Task</h3>
+                            <p>Measures cognitive inhibition and processing speeds. Select the button matches the <strong>COLOR</strong> of the text, NOT the word itself.</p>
+                            <button class="btn btn-primary" id="btn-start-stroop">Start Stroop Test</button>
+                        </div>
+                        <div class="game-play hidden" id="stroop-play">
+                            <div class="game-timer-banner">Time left: <span id="stroop-timer">10</span>s</div>
+                            <div class="stroop-word" id="stroop-word-display">RED</div>
+                            <div class="stroop-options" id="stroop-options-grid">
+                                <!-- Trigger buttons -->
+                            </div>
+                        </div>
+                        <div class="game-results hidden" id="stroop-results">
+                            <h3>Test Terminated</h3>
+                            <div class="stats-row">
+                                <span>Total Answers:</span> <span id="stroop-count">0</span>
+                            </div>
+                            <div class="stats-row">
+                                <span>Accuracy:</span> <span id="stroop-acc" class="green">100%</span>
+                            </div>
+                            <div class="stats-row">
+                                <span>Average Delay:</span> <span id="stroop-delay">0ms</span>
+                            </div>
+                            <button class="btn btn-secondary" id="btn-restart-stroop">Try Again</button>
+                        </div>
+                    </div>
+
+                    <!-- Game 2: Target Click Grid -->
+                    <div class="game-view hidden" id="game-grid">
+                        <div class="game-intro" id="grid-intro">
+                            <h3>Spatial Reaction Speed Grid</h3>
+                            <p>Measures motor coordination and spatial reflex response. Click the highlighted target node as fast as possible as it repositions.</p>
+                            <button class="btn btn-primary" id="btn-start-grid">Start Grid Test</button>
+                        </div>
+                        <div class="game-play hidden" id="grid-play">
+                            <div class="game-timer-banner">Time left: <span id="grid-timer">10</span>s</div>
+                            <div class="target-grid" id="reaction-target-grid">
+                                <!-- Generated dynamically via JS -->
+                            </div>
+                        </div>
+                        <div class="game-results hidden" id="grid-results">
+                            <h3>Test Terminated</h3>
+                            <div class="stats-row">
+                                <span>Targets Clicked:</span> <span id="grid-score">0</span>
+                            </div>
+                            <div class="stats-row">
+                                <span>Speed Index:</span> <span id="grid-speed">0 clicks/sec</span>
+                            </div>
+                            <button class="btn btn-secondary" id="btn-restart-grid">Try Again</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Telemetry Electroencephalogram Stream Panel -->
+        <footer class="telemetry-panel">
+            <div class="telemetry-panel-header">
+                <div class="telemetry-title">
+                    <i data-lucide="pulse"></i>
+                    <span>Electroencephalogram (EEG) Channels Stream</span>
+                </div>
+                <div class="telemetry-filters">
+                    <label class="telemetry-filter-chk"><input type="checkbox" id="chk-alpha" checked> <span>Alpha (8-12Hz)</span></label>
+                    <label class="telemetry-filter-chk"><input type="checkbox" id="chk-beta" checked> <span>Beta (12-30Hz)</span></label>
+                    <label class="telemetry-filter-chk"><input type="checkbox" id="chk-theta" checked> <span>Theta (4-8Hz)</span></label>
+                    <label class="telemetry-filter-chk"><input type="checkbox" id="chk-gamma" checked> <span>Gamma (30-100Hz)</span></label>
+                </div>
+            </div>
+            <div class="telemetry-canvas-container">
+                <!-- EEG Waveforms Canvas -->
+                <canvas id="eeg-canvas" class="eeg-canvas"></canvas>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Main Script JS -->
+    <script src="app.js"></script>
+    <script>
+        // Init icons
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
