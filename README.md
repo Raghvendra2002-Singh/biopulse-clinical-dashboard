@@ -226,9 +226,11 @@ BioPulse Clinical is an educational software project using simulated patient inf
 
 👨‍💻 Author
 
-Raghvendra Singh
+Raghvendra Singh Chauhan
 
 B.Tech — Information Technology
 Rajkiya Engineering College, Banda
 
 GitHub: https://github.com/Raghvendra2002-Singh
+
+Live Demo - https://raghvendra2002-singh.github.io/biopulse-clinical-dashboard/
